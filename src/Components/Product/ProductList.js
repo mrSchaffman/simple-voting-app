@@ -14,9 +14,9 @@ export default class ProductList extends React.Component{
     }
 
     handleProductUpVote=(productId)=>{
-        console.log('product ID:'+productId);
+        console.log('product ID:'+ productId);
 
-        const pdts = this.state.productList.map((product)=>{
+        const updatedProducts = this.state.productList.map((product)=>{
                 if(productId === product.id){
                     return Object.assign({},product,{ votes: product.votes + 1});
                 }else{
@@ -26,15 +26,15 @@ export default class ProductList extends React.Component{
         );
 
         this.setState({
-                productList:pdts,
+                productList: updatedProducts,
             }
         );
     }
     render() {
 
-        const productComponents = products.map(product=>(
+        const mappedProducts = products.map(product=>(
             <Product
-                key={product.id}
+                key={'pdtId: ' + product.id}
                 id={product.id}
                 title={product.title}
                 description={product.description}
@@ -47,7 +47,7 @@ export default class ProductList extends React.Component{
         ));
         return (
             <div className='ui unstackable items'>
-                {productComponents}
+                {mappedProducts}
             </div>
         );
     }
